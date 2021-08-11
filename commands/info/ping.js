@@ -14,14 +14,19 @@ module.exports = {
         const msg = new Discord.MessageEmbed()
             .setDescription(`🏓 Pinging...`)
             .setFooter("Fetching Data...")
-            
-            var Msg = await message.channel.send({embeds: [msg] });
+             
+             let hours = Math.floor(client.uptime / 3600000);
+             let minutes = Math.floor(client.uptime / 60000) % 60;
+             let seconds = Math.floor(client.uptime / 1000) % 60;
+
+            var Msg = await message.reply({embeds: [msg] , allowedMentions: {repliedUser: false}});
 
             let x = new Discord.MessageEmbed()
             .setTitle('🏓 Pong')
             .addFields(
                 { name: 'API', value: `${Math.round(client.ws.ping)}ms`, inline: true },
-                { name: 'Latency', value: `${Math.floor(Msg.createdAt - message.createdAt)}ms`, inline: true }
+                { name: 'Latency', value: `${Math.floor(Msg.createdAt - message.createdAt)}ms`, inline: true },
+                { name: 'Uptime', value: `${hours}h ${minutes}m ${seconds}s`, inline: true}
             )
             .setFooter(`Here's what I feteched.`)
             

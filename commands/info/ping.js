@@ -3,7 +3,10 @@ const Discord = require("discord.js")
 
 module.exports = {
     name: "ping",
-    aliases: ['p'],
+    description: "Returns the latency.",
+    aliases: ['uptime'],
+    usage: "-ping",
+    example: "-ping",
     /**
      *
      * @param {Client} client

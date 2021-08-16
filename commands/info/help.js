@@ -114,7 +114,24 @@ module.exports = {
                 )
     
                 interaction.update({embeds: [categoryEmbed]})
-                } else {
+                } else if (directory === "moderation"){
+                    const categoryEmbed = new Discord.MessageEmbed()
+                    .setTitle('Moderation Commands')
+                    .setDescription('List of Commands')
+                    .setFooter('Use -help [command] for command details. ')
+                    .addFields(
+                        category.commands.map((cmd) => {
+                            return {
+                                name: `\`${cmd.name}\``,
+                                value: cmd.description,
+                                inline: true
+                        };
+                    })
+                    
+                )
+    
+                interaction.update({embeds: [categoryEmbed]})
+                }else {
                     const embed = new Discord.MessageEmbed()
                     .setDescription('```You don\'t have the required permission.```')
                     return message.reply({embeds: [embed] , allowedMentions: {repliedUser: false}});
@@ -143,7 +160,7 @@ module.exports = {
             .addField("Aliases", aliases, true)
             .addField("Usage", usage, true)
             .addField("Example", example, true)
-            .addField("Permissions", permissions, true)
+            .addField("Permissions", (`\`\`\`${permissions}\`\`\``), true)
             
             return message.reply({embeds: [embed] , allowedMentions: {repliedUser: false}});
           } else {
